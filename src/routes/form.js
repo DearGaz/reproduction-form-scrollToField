@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
 
-const FormDemo = ({}) => {
+const FormDemo = () => {
   const [form] = Form.useForm();
 
   const onSubmit = () => {
@@ -11,10 +11,17 @@ const FormDemo = ({}) => {
       .then(() => {})
       .catch((errors) => {
         if (errors.errorFields && errors.errorFields.length > 0) {
-          form.scrollToField(errors.errorFields[0].name, {
-            block: "center",
+          const errorEleId = errors.errorFields[0].name;
+          const errorEle = document.getElementById(errorEleId + "");
+          errorEle.scrollIntoView({
             behavior: "smooth",
+            block: "center",
+            inline: "center",
           });
+          // form.scrollToField(errors.errorFields[0].name, {
+          //   block: "center",
+          //   behavior: "smooth",
+          // });
         }
       });
   };
